@@ -1,0 +1,52 @@
+
+#export CXX=g++
+#export CC=gcc
+TARGET=/lib-linux64
+
+#+++++++++++++++Core SystemC+++++++++++++
+
+export SC_PATH=/home/jeferson/Downloads/systemc-libs/systemc-2.3.1a
+export SC_INCLUDE=/home/jeferson/Downloads/systemc-libs/systemc-2.3.1a/include
+export SC_LIB=$SC_PATH$TARGET
+
+#++++++++++++++SystemC-UVM+++++++++++++++
+
+#export SC_UVM_PATH=/home/jeferson/Downloads/SystemC-libs/uvm-systemc-1.0-alpha1
+#export SC_UVM_INCLUDE=/home/jeferson/Downloads/SystemC-libs/uvm-systemc-1.0-alpha1/include
+#export SC_UVM_LIB=$SC_UVM_PATH$TARGET
+
+#+++++++++++++SystemC-AMS++++++++++++++++
+		   
+export SC_AMS_PATH=/home/jeferson/Downloads/systemc-libs/systemc-ams-2.1
+export SC_AMS_INCLUDE=/home/jeferson/Downloads/systemc-libs/systemc-ams-2.1/include
+export SC_AMS_LIB=$SC_AMS_PATH$TARGET
+
+
+export LD_LIBRARY_PATH=$SC_LIB$SC:$SC_UVM_LIB:$SC_AMS_LIB
+
+echo "__________Diretórios SystemC"_________________"
+echo "."
+echo SC_PATH $SC_PATH
+echo SC_INCLUDE $SC_INCLUDE
+echo SC_LIB $SC_LIB
+echo "."
+echo "___________Diretórios SystemC-UVM"____________"
+echo "."
+echo SC_UVM_PATH $SC_UVM_PATH
+echo SC_UVM_INCLUDE $SC_UVM_INCLUDE
+echo SC_UVM_LIB $SC_UVM_LIB
+echo "."
+echo "___________Diretórios SystemC-AMS_____________"
+echo "."
+echo SC_AMS_PATH $SC_AMS_PATH
+echo SC_AMS_INCLUDE $SC_AMS_INCLUDE
+echo SC_AMS_LIB $SC_AMS_LIB
+echo "."
+echo "____________LD_LIBRARY_PATH____________________"
+echo "."
+echo LD_LIBRARY_PATH $LD_LIBRARY_PATH
+echo "."
+echo "_______________________________________________"
+echo "----------------------------------------------"
+
+

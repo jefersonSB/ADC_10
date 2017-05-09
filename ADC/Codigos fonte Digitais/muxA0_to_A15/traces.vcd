@@ -1,0 +1,141 @@
+$date
+     May 01, 2017       22:11:06
+$end
+
+$version
+ SystemC 2.3.1-Accellera --- Apr  1 2017 23:29:32
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire    4  aaaaa  sel_bit_in [3:0]  $end
+$var wire    1  aaaab  CLK       $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+b0 aaaaa
+1aaaab
+$end
+
+#500000000
+0aaaab
+
+#1000000000
+b1 aaaaa
+1aaaab
+
+#1500000000
+0aaaab
+
+#2000000000
+b10 aaaaa
+1aaaab
+
+#2500000000
+0aaaab
+
+#3000000000
+b11 aaaaa
+1aaaab
+
+#3500000000
+0aaaab
+
+#4000000000
+b100 aaaaa
+1aaaab
+
+#4500000000
+0aaaab
+
+#5000000000
+b101 aaaaa
+1aaaab
+
+#5500000000
+0aaaab
+
+#6000000000
+b110 aaaaa
+1aaaab
+
+#6500000000
+0aaaab
+
+#7000000000
+b111 aaaaa
+1aaaab
+
+#7500000000
+0aaaab
+
+#8000000000
+b1000 aaaaa
+1aaaab
+
+#8500000000
+0aaaab
+
+#9000000000
+b1001 aaaaa
+1aaaab
+
+#9500000000
+0aaaab
+
+#10000000000
+b1010 aaaaa
+1aaaab
+
+#10500000000
+0aaaab
+
+#11000000000
+b1011 aaaaa
+1aaaab
+
+#11500000000
+0aaaab
+
+#12000000000
+b1100 aaaaa
+1aaaab
+
+#12500000000
+0aaaab
+
+#13000000000
+b1101 aaaaa
+1aaaab
+
+#13500000000
+0aaaab
+
+#14000000000
+b1110 aaaaa
+1aaaab
+
+#14500000000
+0aaaab
+
+#15000000000
+b1111 aaaaa
+1aaaab
+
+#15500000000
+0aaaab
+
+#16000000000
+1aaaab
+
+#16500000000
+0aaaab
+
