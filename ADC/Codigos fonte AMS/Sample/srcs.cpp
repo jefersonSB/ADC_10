@@ -3,7 +3,6 @@
 #include <cstdlib> // for std::rand
 #include <cmath>   // for M_PI, std::sin, std::sqrt, and std::log
 
-
 // Método de inicialização
 
 void srcs::initialize(){		
@@ -22,21 +21,20 @@ void srcs::shift(double a, double f){
 // Set atributos do modelo TDF 
 
 void srcs::set_attributes(){ 
-	out_tdf_de.set_timestep(1.0, SC_US);
+	out_tdf.set_timestep(1.0, SC_NS);
 }
 
 // Método de alteração de parâmetros de fonte
 
 void srcs::processing(){
-
-	if (shift_pram.read() == true){
-		shift(3.0, 0.3e3);
-	}else if(shift_pram.read() == false){
-		shift(5.0, 1e3);
+	if (ctrl_in.read() == true){
+		ctrl_out.write(true);
+	}else if(ctrl_in.read() == false){
+		ctrl_out.write(false);
 		}
 
-	producer.write(true);									// notificação de produção de amostra
-	t = out_tdf_de.get_time().to_seconds();       			// Get current time of the sample
-	out_tdf_de.write(ampl * sin(2.0 * M_PI * freq * t)); 	// escrita de valor na saída 
-	producer.write(false);									// notificação de fim produção de amostra	
+	t = out_tdf.get_time().to_seconds();       			/// Get current time of the sample
+	out_tdf.write(ampl * sin(2.0 * M_PI * freq * t)); 	/// escrita de valor na saída 
+	///out_tdf.write(5);								/// para teste de carga e escar de capacitor
+
 }

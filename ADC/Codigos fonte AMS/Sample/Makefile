@@ -3,9 +3,10 @@
 # Project files
 
 MODULE1=sc_main
-#MODULE2=sine
+MODULE2=srcs
 SRC1 =./sc_main.cpp
-#SRC2 =./sine.cpp 
+SRC2 =./srcs.cpp 
+
 
 EXE_NAME=sc_main
 
@@ -36,8 +37,9 @@ all:
 	@echo "+++++++++++++++++++++++++++++++++++++++++++++++"
 	@echo "+++ Compiling +++++++++++++++++++++++++++++++++"
 	$(CXX) $(CFLAGS) $(PREFIX) -c $(SRC1)
+	$(CXX) $(CFLAGS) $(PREFIX) -c $(SRC2)
 	@echo "+++ Generating executable +++++++++++++++++++++"
-	$(CXX) -o $(EXE_NAME).x $(MODULE1).o $(SYSTEMC_LIB_PATH) $(SYSTEMC_AMS_LIB_PATH) 
+	$(CXX) -o $(EXE_NAME).x $(MODULE1).o $(MODULE2).o $(SYSTEMC_LIB_PATH) $(SYSTEMC_AMS_LIB_PATH) 
 	@echo "+++ Executing +++++++++++++++++++++++++++++++++"
 	$(WORK)/$(EXE_NAME).x
 	
