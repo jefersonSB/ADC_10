@@ -8,7 +8,8 @@
 SC_MODULE(Ban_Reg){
 	
 ///configurações TLM para comunicação com a plataforma	
-	tlm_utils::simple_target_socket<Ban_Reg> target;   // Soquete TLM-2, padrão para 32-bits de largura, protocolo base
+	tlm_utils::simple_target_socket<Ban_Reg> target1;   		
+	tlm_utils::simple_target_socket<Ban_Reg> target2;   				/// Soquete TLM-2, padrão para 32-bits de largura, protocolo base
 /// Fin
 
 /// Portas de de comunicação etre blocos  
@@ -19,10 +20,11 @@ SC_MODULE(Ban_Reg){
 
 	void shift_reg(); 	/// Método para mudança de valores de registradores
 
-	SC_CTOR(Ban_Reg):target("target")
+	SC_CTOR(Ban_Reg):target1("target1"),target2("target2")
 	{
 		/// Registrar callback para chamada de método de interface b_transport de entrada
-		target.register_b_transport(this, &Ban_Reg::b_transport);
+		target1.register_b_transport(this, &Ban_Reg::b_transport);
+		target2.register_b_transport(this, &Ban_Reg::b_transport);
 {
 		b_reg[ ADC12CTL0   ] = 0b0000000000010010; 
 		b_reg[ ADC12CTL1   ] = 0b1111000001000000;
@@ -111,32 +113,42 @@ SC_MODULE(Ban_Reg){
 ///*
 void Ban_Reg::shift_reg(){
 
-	b_reg[0x08F] = 0b0000000010000101;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000101;
+	b_reg[ ADC12CTL1   ] = 0b1111001001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000101;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000101;
+	b_reg[ ADC12CTL1   ] = 0b1111000001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000111;
+	b_reg[ ADC12CTL1   ] = 0b1111001001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000111;
+	b_reg[ ADC12CTL1   ] = 0b1111000001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000111;
+	b_reg[ ADC12CTL1   ] = 0b1111001001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000111;
+	b_reg[ ADC12CTL1   ] = 0b1111000001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000101;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000101;
+	b_reg[ ADC12CTL1   ] = 0b1111001001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000101;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000101;
+	b_reg[ ADC12CTL1   ] = 0b1111000001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010001111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010001111;
+	b_reg[ ADC12CTL1   ] = 0b1111001001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010001111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010001111;
+	b_reg[ ADC12CTL1   ] = 0b1111000001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010000101;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010000101;
+	b_reg[ ADC12CTL1   ] = 0b1111001001000000;
 	wait();
-	b_reg[0x08F] = 0b0000000010001111;
+	b_reg[ ADC12MCTL15 ] = 0b0000000010001111;
+	b_reg[ ADC12CTL1   ] = 0b1111000001000000;
 	wait();
-
-	
 }
 ///*/
 
