@@ -3,12 +3,20 @@
 # define DEFINES_H
 
 #include <systemc.h>
+#include <tlm_utils/simple_target_socket.h>
+#include "ac_tlm_protocol.H"
+
+/** namespace **/ 
+using namespace tlm; 
+using namespace tlm_utils; 
 
 #include <tlm.h>
-#include <tlm_utils/simple_target_socket.h> 							/// Needed for the simple_target_socket
-#define SC_INCLUDE_DYNAMIC_PROCESSES
+#include <tlm_utils/simple_target_socket.h>
 
-# define SIZE 0x01A9 													/// Tamaho do bano de registradores
+
+#define SC_INCLUDE_DYNAMIC_PROCESSES									/// Needed for the simple_target_socket
+
+#define SIZE 0x01A9 													/// Tamaho do bano de registradores
 typedef sc_uint<16> type_reg;
 
 #define ADC12CTL0	0x01A0 

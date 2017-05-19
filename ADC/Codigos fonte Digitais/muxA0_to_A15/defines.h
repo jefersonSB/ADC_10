@@ -5,11 +5,10 @@
 #include <systemc.h>
 
 #include <tlm.h>
-#include <tlm_utils/simple_target_socket.h>
-// Needed for the simple_target_socket
+#include <tlm_utils/simple_target_socket.h> 							/// Needed for the simple_target_socket
 #define SC_INCLUDE_DYNAMIC_PROCESSES
 
-#define SIZE 0x01A9 /// Tamaho do bano de registradores
+# define SIZE 0x01A9 													/// Tamaho do bano de registradores
 typedef sc_uint<16> type_reg;
 
 #define ADC12CTL0	0x01A0 

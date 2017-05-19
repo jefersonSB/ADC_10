@@ -18,8 +18,6 @@
 #ifndef MUXA0_TO_A15_H
 #define MUXA0_TO_A15_H
 
-//#define SIZE 0x01A8 /// Tamaho do bano de registradores
-
 #include "defines.h"
 #include "tlm_utils/simple_initiator_socket.h"
 
@@ -51,7 +49,7 @@ SC_MODULE(muxA0_to_A15){
 /// Fin
 
 	type_reg data;		
-													/// ADC12MCTLx, [EOS(7), SREFx(6-4), INCHx(3-0)] Só alterar quando ENC = 0
+																		/// ADC12MCTLx, [EOS(7), SREFx(6-4), INCHx(3-0)] Só alterar quando ENC = 0
 /// Bloco de metodos 
 	void tlm_communication();
 	void read_channel();
@@ -81,7 +79,7 @@ SC_MODULE(muxA0_to_A15){
 void muxA0_to_A15::read_channel(){
 	
 	if (ENC == 1){
-		outpu_mux.write(input_srcs[channel].read()*0.5);
+		outpu_mux.write(input_srcs[channel].read());
 	}
 }
 ///*/
@@ -106,11 +104,6 @@ void muxA0_to_A15::tlm_communication(){
 
 			trans.set_command(CMD);											///
 			trans.set_address(address);										///	
-///			trans.set_data_ptr((unsigned char*)(&data) );					///
-///			trans.set_data_length(16);										///
-///			trans.set_streaming_width( 16 ); 								/// = data_length to indicate no streaming
-///			trans.set_byte_enable_ptr(0); 									/// 0 indicates unused	
-///			trans.set_dmi_allowed( false ); 								/// Mandatory initial value
 			trans.set_response_status( tlm::TLM_INCOMPLETE_RESPONSE );		/// Clear the response status
 
 			socket->b_transport( trans, delay );  							/// Blocking transport call
@@ -124,7 +117,7 @@ void muxA0_to_A15::tlm_communication(){
 			ENC [0]		= tmp[1];											/// Obtenção do bit 
 			
 			wait(delay); 													/// Realize the delay annotated onto the transport call
-		/*	
+			/**	
 			cout << "trans = { " << (CMD ? 'W' : 'R') << ", "<< address
 			 << " } , data = " << tmp << " at time " << sc_time_stamp()
 			 << " delay = " << delay << '\n';
@@ -148,7 +141,7 @@ void muxA0_to_A15::tlm_communication(){
 				ADC12MCTLx +=128;
 		
 				wait(delay); 			/// Realize the delay annotated onto the transport call
-				/*
+				/**
 				cout << "trans = { " << (CMD ? 'W' : 'R') << ", "<< address
 					 << " } , data = " << tmp << " at time " << sc_time_stamp()
 					 << " delay = " << delay << '\n';
@@ -169,7 +162,7 @@ void muxA0_to_A15::tlm_communication(){
 				INCHx = tmp.range(3,0);
 
 				wait(delay); 			/// Realize the delay annotated onto the transport call
-				/*
+				/**
 				cout << "trans = { " << (CMD ? 'W' : 'R') << ", "<< address
 					 << " } , data = " << tmp << " at time " << sc_time_stamp()
 					 << " delay = " << delay << '\n';
