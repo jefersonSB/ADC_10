@@ -60,7 +60,7 @@ SC_MODULE(muxA0_to_A15){
 	: socket("muxA0_to_A15")
 	, CMD(tlm::TLM_READ_COMMAND)
 	, address (0x0)
-	, delay (10.0, SC_NS), channel(11)
+	, delay (1.0, SC_NS), channel(11)
 	, input_srcs ("input_srcs", 16)
 	, consumer("consumer", 16)
 	{
@@ -87,7 +87,7 @@ void muxA0_to_A15::read_channel(){
 
 void muxA0_to_A15::tlm_communication(){
 
-	cout << '\n' << '\t' <<  "COMUNICAÇÂO INICADA:" << '\n' <<'\n';
+	cout << '\n' << '\t' <<  "COMUNICAÇÂO INICADA: MUX_A0_to_A15" << '\n' <<'\n';
 	sc_bv < 16 > tmp;
 	CMD = tlm::TLM_READ_COMMAND;
 	
@@ -173,7 +173,6 @@ void muxA0_to_A15::tlm_communication(){
 					channel = INCHx;
 					cout <<"ctr_chanel.notify("<< channel  <<")" << endl <<endl;	
 				}
-				
 			}
 		}
 	}

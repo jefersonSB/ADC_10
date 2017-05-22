@@ -35,5 +35,6 @@ void srcs::processing(){
 	producer.write(true);									/// notificação de produção de amostra
 	t = out_tdf_de.get_time().to_seconds();       			/// Get current time of the sample
 	out_tdf_de.write(ampl * sin(2.0 * M_PI * freq * t)); 	/// escrita de valor na saída 
+///	out_tdf_de.write(5);
 	producer.write(false);									/// notificação de fim produção de amostra	
 }

@@ -37,53 +37,63 @@ SC_MODULE(mux_shp){
 	type_reg data;
 /// Fin
 		
-	sc_out  <bool> ADC12CLK;
+	sc_out  <bool> sampcon_port;										/// porta de saida de sinal sampcom para blocos internos
+	sc_in  <bool> klsps_200;											/// porta de saida de sinal sampcom para blocos internos
 	
 /// BLoco de variaveis
-	sc_bv <1> SHP;
-	sc_bv <1> SAMPCON;
-	
-/// BLoco de eventos
-	sc_event samp_event;
-/// Fin
-	
-	void tlm_communication();
+	sc_bv <1> SHP;														/// Escolha de modo de operação 
+	sc_bv <1> SAMPCON;													/// variavel de disparo do switch do sample and hold
 
-	void Adc12clk();
+/// BLoco de eventos
+	sc_event samp_event;												/// Evento para disparar o switch do sample and hold
+/// Fin
+
+/// BLoco Metodos 
+	void tlm_communication();
+	void write_sampcon();
+/// Fin
 
 	SC_CTOR(mux_shp)
 	: SHP(0), SAMPCON(false)
-	, socket("mux_shp"), ADC12CLK("ADC12CLK")
+	, socket("mux_shp"), sampcon_port("sampcon_port")
 	, CMD(tlm::TLM_READ_COMMAND)
 	, address (0x0)
-	, delay (10.0, SC_NS)
+	, delay (1.0, SC_NS)
+	, klsps_200 ("klsps_200")
 	{
 		SC_THREAD(tlm_communication);
 		
-		SC_THREAD(Adc12clk);
-///			dont_initialize();
+		SC_THREAD(write_sampcon);
+			sensitive << klsps_200.pos()<< klsps_200.neg();
+			dont_initialize();
 	}
-
 };
 
-void mux_shp::Adc12clk(){
+void mux_shp::write_sampcon(){
 
-	while(true){
-	///	cout << '\t' << "fora" << '\n';
-		while(SAMPCON==1){
-	///		cout << '\t' << "dentro" << '\n';
-			ADC12CLK.write(1);
-			wait(6, SC_US); 	
-			ADC12CLK.write(0); 	
-			wait(6, SC_US); 	
+	while(1){
+		if (SHP == 1){
+			sampcon_port.write(1);
+			wait();
+			sampcon_port.write(0);
+			wait();
 		}
-	wait(samp_event);
+		wait(1.0, SC_NS);
+
 	}
+///	while(true){
+///		wait(samp_event);
+///		if (SAMPCON == 1){
+///			sampcon_port.write(1);
+///		}else{
+///			sampcon_port.write(0);
+///		}
+	///}
 }
 
 void mux_shp::tlm_communication(){
 
-	cout << '\n' << '\t' <<  "COMUNICAÇÂO INICADA:" << '\n' <<'\n';
+	cout << '\n' << '\t' <<  "COMUNICAÇÂO INICADA: MUX_SHP" << '\n' <<'\n';
 	sc_bv < 16 > tmp;
 	CMD = tlm::TLM_READ_COMMAND;
 	
@@ -117,8 +127,8 @@ void mux_shp::tlm_communication(){
 			///cout << " ADC12CTL1 -- SHP = " << SHP << '\n';
 
 			SAMPCON = SHP;												/// SAMPCON 1 ou 0
-			samp_event.notify();
+			///samp_event.notify();
 			wait(delay); 												/// Realize the delay annotated onto the transport call
-			}
 		}
+	}
 }

@@ -21,7 +21,7 @@
  * Quando SAMPCON = 1 Sample and Hold ativo e amostra o sinal com o ADC12CLK,
  * quando SAMPCON = 0 Sample desativado. SAMPCON vem do blo MUX_SHP
  * 
- * Resolução (LSB) = Vmax/(2^n) = 5V/4095 = 10,101 mV 
+ * Resolução (LSB) = Vmax/(2^n) = 3.3V/4095 = 805.86 uV 
  * A tensão VC do do capacitor CI deve ser carregada dentro de 1/2 LSB 
  * da tensão de fonte VS para uma conversão precisa de 12 bits.
  * 
